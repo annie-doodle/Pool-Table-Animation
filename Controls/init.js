@@ -1,5 +1,5 @@
 var scene, camera, renderer;
-var ambientLight, pointLight, spotLight;
+var ambientLight, pointLight;
 var ball, paddle1, paddle2;
 
 var initScene = function () {
@@ -104,12 +104,11 @@ var initAmbientLight = function () {
 var initPointLight = function () {
 	pointLight = new THREE.PointLight(Config.pointLight.color);
 
-	pointLight.position.x = Config.pointLight.x;
-	pointLight.position.y = Config.pointLight.y;
-	pointLight.position.z = Config.pointLight.z;
+	pointLight.position.x = ball.position.x + Config.pointLight.x;
+	pointLight.position.y = ball.position.y + Config.pointLight.y;
+	pointLight.position.z = ball.position.z + Config.pointLight.z;
 
 	pointLight.intensity = Config.pointLight.intensity;
-	pointLight.distance = Config.pointLight.distance;
 
     pointLight.castShadow = true;
 	

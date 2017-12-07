@@ -61,10 +61,9 @@ var Config = {
 	},
 	pointLight: {
 		color: 0xffffff,
-		x: -300,
+		x: 0,
 		y: 0,
-		z: 300,
+		z: 120,
 		intensity: 1,
-		distance: 2000
 	}
 }

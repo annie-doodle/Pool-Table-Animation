@@ -15,6 +15,7 @@ var animatePhysics = function () {
 	animatePaddleBallInteractions();
 
 	animateCamera();
+	animateLight();
 }
 
 var animateBall = function () {
@@ -101,6 +102,11 @@ var animateCamera = function () {
 	// rotate to face our opponent
 	camera.rotation.y = -Math.PI / 3;
 	camera.rotation.z = -Math.PI / 2;
+}
+var animateLight = function () {
+	pointLight.position.x = ball.position.x + Config.pointLight.x;
+	pointLight.position.y = ball.position.y + Config.pointLight.y;
+	pointLight.position.z = ball.position.z + Config.pointLight.z;
 }
 
 var reset = function () {
