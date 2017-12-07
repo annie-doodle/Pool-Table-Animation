@@ -110,6 +110,7 @@ var reset = function () {
 	ball.velocity.x = 0;
 	ball.velocity.y = 0;
 
+	// animate light
 	ambientLight.color.set(Math.random() * 0xffffff);
 }
 var restart = function () {
