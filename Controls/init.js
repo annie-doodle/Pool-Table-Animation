@@ -22,19 +22,19 @@ var initScene = function () {
 
 	initAmbientLight();
 	initPointLight();
-	initSpotLight();
 }
 var initGround = function () {
-	var groundGeometry = new THREE.CubeGeometry(Config.ground.width, Config.ground.depth, Config.ground.height, Config.ground.resolution, Config.ground.resolution, Config.ground.resolution);
+	var groundGeometry = new THREE.CubeGeometry(Config.ground.width, Config.ground.depth, Config.ground.height);
 	var ground = new THREE.Mesh(groundGeometry, Config.ground.material);
 
 	ground.position.z = Config.ground.sink;
 	
 	ground.receiveShadow = true;	
+	
 	scene.add(ground);
 }
 var initTable = function () {
-	var tableGeometry = new THREE.CubeGeometry(Config.table.width, Config.table.height, Config.table.depth, Config.table.resolution, Config.table.resolution, 1);
+	var tableGeometry = new THREE.CubeGeometry(Config.table.width, Config.table.height, Config.table.depth);
 	var table = new THREE.Mesh(tableGeometry, Config.table.material);
 	
 	table.position.z = Config.table.sink;
@@ -44,16 +44,16 @@ var initTable = function () {
 	
 	scene.add(table);
 
-	var planeGeometry = new THREE.PlaneGeometry(Config.plane.width, Config.plane.height, Config.plane.resolution, Config.plane.resolution);
-	var plane = new THREE.Mesh(planeGeometry, Config.plane.material);
+	var surfaceGeometry = new THREE.PlaneGeometry(Config.surface.width, Config.surface.depth);
+	var surface = new THREE.Mesh(surfaceGeometry, Config.surface.material);
 	
-	plane.castShadow = true;	
-	plane.receiveShadow = true;	
+	surface.castShadow = true;	
+	surface.receiveShadow = true;	
 
-	scene.add(plane);
+	scene.add(surface);
 }
 var initBall = function () {
-	var ballGeometry = new THREE.SphereGeometry(Config.ball.radius, Config.ball.segments, Config.ball.ring);
+	var ballGeometry = new THREE.SphereGeometry(Config.ball.radius);
 	ball = new THREE.Mesh(ballGeometry, Config.ball.material);
 
 	ball.position.x = 0;
@@ -68,7 +68,7 @@ var initBall = function () {
 	scene.add(ball);
 }
 var initPaddels = function () {
-	var paddle1Geometry = new THREE.CubeGeometry(Config.paddle1.width, Config.paddle1.height, Config.paddle1.depth, Config.paddle1.resolution, Config.paddle1.resolution, Config.paddle1.resolution);
+	var paddle1Geometry = new THREE.CubeGeometry(Config.paddle1.width, Config.paddle1.height, Config.paddle1.depth);
 	paddle1 = new THREE.Mesh(paddle1Geometry, Config.paddle1.material);
 
 	paddle1.position.x = -Config.field.width / 2 + Config.paddle1.width;
@@ -81,7 +81,7 @@ var initPaddels = function () {
 
 	scene.add(paddle1);
 	
-	var paddle2Geometry = new THREE.CubeGeometry(Config.paddle2.width, Config.paddle2.height, Config.paddle2.depth, Config.paddle2.resolution, Config.paddle2.resolution, Config.paddle2.resolution);
+	var paddle2Geometry = new THREE.CubeGeometry(Config.paddle2.width, Config.paddle2.height, Config.paddle2.depth);
 	paddle2 = new THREE.Mesh(paddle2Geometry, Config.paddle2.material);
 	  
     paddle2.position.x = Config.field.width / 2 - Config.paddle2.width;
@@ -97,6 +97,8 @@ var initPaddels = function () {
 var initAmbientLight = function () {
 	ambientLight = new THREE.AmbientLight(Config.ambientLight.color);
 
+	ambientLight.intensity = Config.ambientLight.intensity;
+	
 	scene.add(ambientLight);
 }
 var initPointLight = function () {
@@ -113,19 +115,7 @@ var initPointLight = function () {
 	
 	scene.add(pointLight);
 }
-var initSpotLight = function () {
-    spotLight = new THREE.SpotLight(Config.spotLight.color);
-    
-    spotLight.position.x = Config.spotLight.x;
-    spotLight.position.y = Config.spotLight.y;
-    spotLight.position.z = Config.spotLight.z;
 
-    spotLight.intensity = Config.spotLight.intensity;
-
-    spotLight.castShadow = true;
-    
-    scene.add(spotLight);
-}
 var initControl = function () {
 	window.addEventListener('keydown', function (event) {
 		_keyCode = event.keyCode;
